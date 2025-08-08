@@ -126,7 +126,7 @@ async function joinTheModeratorAsP1(options?: IJoinOptions) {
         // we prioritize the access token when iframe is not used and private key is set,
         // otherwise if private key is not specified we use the access token if set
         if (process.env.JWT_ACCESS_TOKEN
-            && ((jwtPrivateKeyPath && !ctx.testProperties.useIFrameApi && !options?.preferGenerateToken)
+            && ((jwtPrivateKeyPath && !testProperties.useIFrameApi && !options?.preferGenerateToken)
                 || !jwtPrivateKeyPath)) {
             participantOps.token = { jwt: process.env.JWT_ACCESS_TOKEN };
         } else if (jwtPrivateKeyPath) {
@@ -184,13 +184,13 @@ export async function joinParticipant( // eslint-disable-line max-params
         participantOptions: IParticipantOptions,
         options?: IJoinOptions): Promise<Participant> {
 
-    participantOptions.iFrameApi = ctx.testProperties.useIFrameApi;
+    participantOptions.iFrameApi = testProperties.useIFrameApi;
 
     // @ts-ignore
     const p = ctx[participantOptions.name] as Participant;
 
     if (p) {
-        if (ctx.testProperties.useIFrameApi) {
+        if (testProperties.useIFrameApi) {
             await p.switchInPage();
         }
 
@@ -198,7 +198,7 @@ export async function joinParticipant( // eslint-disable-line max-params
             return p;
         }
 
-        if (ctx.testProperties.useIFrameApi) {
+        if (testProperties.useIFrameApi) {
             // when loading url make sure we are on the top page context or strange errors may occur
             await p.switchToAPI();
         }
@@ -217,7 +217,7 @@ export async function joinParticipant( // eslint-disable-line max-params
 
     let forceTenant = options?.forceTenant;
 
-    if (options?.preferGenerateToken && !ctx.testProperties.useIFrameApi
+    if (options?.preferGenerateToken && !testProperties.useIFrameApi
         && process.env.JWT_KID?.startsWith('vpaas-magic-cookie-') && process.env.IFRAME_TENANT) {
         forceTenant = process.env.IFRAME_TENANT;
     }

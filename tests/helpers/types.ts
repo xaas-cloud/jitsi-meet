@@ -1,22 +1,16 @@
 import { IConfig } from '../../react/features/base/config/configType';
 
 import type { Participant } from './Participant';
-import { ITestProperties } from './TestProperties';
 import type WebhookProxy from './WebhookProxy';
 import { IToken, ITokenOptions } from './token';
 
 export type IContext = {
-    /**
-     * Whether the configuration specifies a JaaS account for the iFrame API tests.
-     */
-    iFrameUsesJaas: boolean;
     p1: Participant;
     p2: Participant;
     p3: Participant;
     p4: Participant;
     roomName: string;
     skipSuiteTests: boolean;
-    testProperties: ITestProperties;
     times: any;
     webhooksProxy: WebhookProxy;
 };
