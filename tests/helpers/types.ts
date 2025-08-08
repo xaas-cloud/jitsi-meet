@@ -36,7 +36,8 @@ export type IParticipantOptions = {
 /**
  * Options for joinConference.
  */
-export type IParticipantJoinOptions = {
+export type IJoinOptions = {
+
     /**
      * Overwrites the base url set in the config.
      */
@@ -52,38 +53,14 @@ export type IParticipantJoinOptions = {
      */
     forceTenant?: string;
 
-    /** The name of the room to join */
-    roomName: string;
-
-    /**
-     * Whether to skip setting display name.
-     */
-    skipDisplayName?: boolean;
-
-    /**
-     * Whether to skip waiting for the participant to join the room. Cases like lobby where we do not succeed to join
-     * based on the logic of the test.
-     */
-    skipWaitToJoin?: boolean;
-};
-
-export type IJoinOptions = {
-
-    /**
-     * Overwrites the base url set in the config.
-     */
-    baseUrl?: string;
-
-    /**
-     * Config overwrites to use.
-     */
-    configOverwrite?: IConfig;
-
     /**
      * When joining the first participant and jwt singing material is available and a provided token
      * is available, prefer generating a new token for the first participant.
      */
     preferGenerateToken?: boolean;
+
+    /** The name of the room to join */
+    roomName: string;
 
     /**
      * Whether to skip setting display name.

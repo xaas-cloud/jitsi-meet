@@ -29,7 +29,7 @@ import Visitors from '../pageobjects/Visitors';
 
 import { LOG_PREFIX, logInfo } from './browserLogger';
 import { IToken } from './token';
-import { IParticipantJoinOptions, IParticipantOptions } from './types';
+import { IJoinOptions, IParticipantOptions } from './types';
 
 export const P1 = 'p1';
 export const P2 = 'p2';
@@ -141,9 +141,10 @@ export class Participant {
             script: string | ((...innerArgs: InnerArguments) => ReturnValue),
             ...args: InnerArguments): Promise<ReturnValue> {
         try {
+            // @ts-ignore
             return await this.driver.execute(script, ...args);
         } catch (error) {
-            console.error('An error occured while trying to execute a script: ', error);
+            console.error('An error occurred while trying to execute a script: ', error);
             throw error;
         }
     }
@@ -193,7 +194,7 @@ export class Participant {
      * @param {IJoinOptions} options - Options for joining.
      * @returns {Promise<void>}
      */
-    async joinConference(options: IParticipantJoinOptions): Promise<void> {
+    async joinConference(options: IJoinOptions): Promise<void> {
         const config = {
             room: options.roomName,
             configOverwrite: {
@@ -259,7 +260,7 @@ export class Participant {
         }
 
         if (!options.skipWaitToJoin) {
-            await this.waitToJoinMUC();
+            await this.waitForMucJoinedOrError();
         }
 
         await this.postLoadProcess();
