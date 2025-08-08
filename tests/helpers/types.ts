@@ -59,9 +59,6 @@ export type IJoinOptions = {
      */
     preferGenerateToken?: boolean;
 
-    /** The name of the room to join */
-    roomName: string;
-
     /**
      * Whether to skip setting display name.
      */
